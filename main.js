@@ -8,23 +8,24 @@ const saveNameForm = document.querySelector('form');
 const inputPhone = document.querySelector('#phone');
 const errorMessageFields = document.querySelector('.errorMessage');
 const sectionRegistration = document.querySelector('.registration');
-const sectionWrapper = document.querySelector('.wrapper');
-const header = document.querySelector('header');
-
-const countItem = items.length;
-const sliderWidth = slider.offsetWidth;
-const headerHeight = header.offsetHeight;
+const headerLink = document.querySelectorAll('.linkBlock__item');
 
 
-let itemWidth =  sliderWidth;
-let leftSideWidth = sliderWidth/countItem;
-let startMargin = sliderWidth - leftSideWidth;
+const countItem = items.length; //количество слайдов
+const sliderWidth = slider.offsetWidth; // длина слайдера
+
+let itemWidth =  sliderWidth; // ширина слайда
+let leftSideWidth = sliderWidth/countItem; // ширина левого края слайда на дом странице
+let startMargin = sliderWidth - leftSideWidth; // марджин для слайдов на старте
 
 homePage();
 document.querySelector(".logo").addEventListener('click', homePage);
 
+
 function homePage () {
-  window.scrollTo(0,0);
+  window.scrollTo(0,0); // скролл вверх
+
+  //обнуляем стили
   for (let i=0; i<countItem; i++){ 
     slider.style.overflowY = '';
     slider.style.display = 'flex';
@@ -37,12 +38,13 @@ function homePage () {
 }
 
 
-showItems();
+showItems(); // раскрытие слайда
 
 function showItems() {
   for (let i=0; i<countItem; i++) {
     
-    buttonMore[i].addEventListener('click', (event) => {
+    // блок всплытия клика
+    buttonMore[i].addEventListener('click', (event) => { 
       event.stopPropagation();
     });
     
@@ -53,13 +55,14 @@ function showItems() {
       textField[i].style.opacity = 1;
       buttonMore[i].style.opacity = 1;
       
-      for (let j=0; j<countItem; j++){
+      for (let j=0; j<countItem; j++){ 
         if (j != i){
           items[j].style.marginRight = -itemWidth + 'px';
           titleH2[j].style.opacity = 0;  
         };
       };
 
+      // появляется скролл
       setTimeout(() => {
         slider.style.overflowY = 'auto';
         slider.style.display = 'block';
@@ -70,14 +73,14 @@ function showItems() {
           textField[i].style.opacity = 1;
           buttonMore[i].style.opacity = 1;
         };
-      }, 2000);
+      }, 1000);
       
     });
   };
 };
 
 sectionRegistration.addEventListener('click', () => {
-  sectionRegistration.scrollIntoView();
+  sectionRegistration.scrollIntoView(); // перевод скролла на эту секцию
 })
 
 inputPhone.addEventListener ('blur', () =>{
@@ -101,4 +104,3 @@ document.querySelector('form').addEventListener('submit', (e) => {
   saveNameForm.elements.phone.value = '';
   saveNameForm.elements.profession.value = '';
 });
-
